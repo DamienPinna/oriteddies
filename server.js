@@ -1,4 +1,4 @@
-const http = require('http');
+const http = require('http'); // Proptocole HTTP
 const app = require('./app');
 
 const normalizePort = val => {
@@ -35,7 +35,7 @@ const errorHandler = error => {
   }
 };
 
-const server = http.createServer(app);
+const server = http.createServer(app); //Création du serveur. app = permet de traiter les requêtes.
 
 server.on('error', errorHandler);
 server.on('listening', () => {
@@ -44,4 +44,4 @@ server.on('listening', () => {
   console.log('Listening on ' + bind);
 });
 
-server.listen(port);
+server.listen(port); // Ecoute sur le port 3000

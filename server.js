@@ -26,7 +26,7 @@ const errorHandler = error => {
       console.error(bind + ' requires elevated privileges.');
       process.exit(1);
       break;
-    case 'EADDRINUSE':
+    case 'EADDRINUSE':gi 
       console.error(bind + ' is already in use.');
       process.exit(1);
       break;

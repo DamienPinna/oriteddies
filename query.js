@@ -10,9 +10,15 @@ const getTeddies = async () => { //Fonction asynchrone
          return data; //On retourne la promesse résolut
       } else { //Si la réponse de la requête est incorrect (statut HTTP entre 300 et 599)
          console.error("retour du serveur : ", response.status);
+         const alert = document.querySelector('.alert'); //Sélection de l'élément du DOM
+         alert.parentElement.classList.remove('d-none'); //Suppression de la classe d-none
+         alert.textContent = `Erreur ${response.status}`; //Ajout du statut dans l'élement du DOM
          return [];
       }
    } catch (error) { //Si la requête n'a pas bien fonctionné, on capture l'erreur.
       console.log(error);
+      const alert = document.querySelector('.alert'); //Sélection de l'élément du DOM
+      alert.parentElement.classList.remove('d-none'); //Suppression de la classe d-none
+      alert.textContent = error; //Ajout de l'erreur dans l'élement du DOM
    }
-}
+};

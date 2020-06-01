@@ -1,7 +1,11 @@
+/**
+ * Permet d'afficher tous les articles dans le navigateur
+ * @returns {Promise}
+ */
 const afficherTeddies = async () => {
    const data = await getTeddies();
    const articles = document.querySelector('#articles');
-   console.log(data[0])
+   // console.log(data)
    let teddies = ""; 
    for (let teddy of data) {
       teddies +=`
@@ -24,4 +28,4 @@ const afficherTeddies = async () => {
    articles.innerHTML = teddies;
 };
 
-afficherTeddies()
+afficherTeddies();

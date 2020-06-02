@@ -5,13 +5,13 @@
 const afficherTeddies = async () => {
    const data = await get('http://localhost:3000/api/teddies');
    const articles = document.querySelector('#articles');
-   // console.log(data)
+   console.log(data)
    let teddies = ""; 
    for (let teddy of data) {
       teddies +=`
             <div class="col-md-6 col-lg-4 mb-4">
                <div class="card h-100">
-                  <a href="produit.html"><img class="card-img-top" src="${teddy.imageUrl}" alt=""></a>
+                  <a href="produit.html#${teddy._id}"><img class="card-img-top" src="${teddy.imageUrl}" alt=""></a>
                   <div class="card-body">
                      <h4 class="card-title">
                         <a href="produit.html">${teddy.name}</a>

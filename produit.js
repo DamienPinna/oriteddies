@@ -1,5 +1,5 @@
-const afficherUnTeddy = async () => {
-   const data = await get('http://localhost:3000/api/teddies/5be9c8541c9d440000665243');
+const afficherUnTeddy = async (idteddy) => {
+   const data = await get(`http://localhost:3000/api/teddies/${idteddy}`);
    const article = document.querySelector('#article');
    console.log(data)
    article.innerHTML =`
@@ -20,4 +20,4 @@ const afficherUnTeddy = async () => {
             </div>`;
 };
 
-afficherUnTeddy();
+afficherUnTeddy('5be9c8541c9d440000665243');

@@ -1,3 +1,9 @@
+const idTeddy = document.location.hash.substring(1); //Récupération de l'id produit passé dans l'url.
+
+/**
+ * Permet d'afficher un produit en fonction de l'id transmis par la page index.html.
+ * @param {String} idteddy 
+ */
 const afficherUnTeddy = async (idteddy) => {
    const data = await get(`http://localhost:3000/api/teddies/${idteddy}`);
    const article = document.querySelector('#article');
@@ -20,4 +26,4 @@ const afficherUnTeddy = async (idteddy) => {
             </div>`;
 };
 
-afficherUnTeddy('5be9c8541c9d440000665243');
+afficherUnTeddy(idTeddy);

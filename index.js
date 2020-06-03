@@ -14,13 +14,13 @@ const afficherTeddies = async () => {
                   <a href="produit.html#${teddy._id}"><img class="card-img-top" src="${teddy.imageUrl}" alt=""></a>
                   <div class="card-body">
                      <h4 class="card-title">
-                        <a href="produit.html">${teddy.name}</a>
+                        <a href="produit.html#${teddy._id}">${teddy.name}</a>
                      </h4>
                      <h5>$${teddy.price}</h5>
                      <p class="card-text">${teddy.description}</p>
                   </div>
                   <div class="card-footer text-center">
-                     <button type="button" class="btn btn-secondary">Commander</button>
+                     <a href="produit.html#${teddy._id}" class="btn btn-secondary">Ca m'intéresse</a>
                   </div>
                </div>
             </div>`;

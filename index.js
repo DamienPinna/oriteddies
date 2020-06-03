@@ -11,7 +11,7 @@ const afficherTeddies = async () => {
       teddies +=`
             <div class="col-md-6 col-lg-4 mb-4">
                <div class="card h-100">
-                  <a href="produit.html#${teddy._id}"><img class="card-img-top" src="${teddy.imageUrl}" alt=""></a>
+                  <a href="produit.html#${teddy._id}"><img class="card-img-top" src="${teddy.imageUrl}" alt="photographie d'un ourson en peluche"></a>
                   <div class="card-body">
                      <h4 class="card-title">
                         <a href="produit.html#${teddy._id}">${teddy.name}</a>

@@ -18,31 +18,33 @@ const afficherUnTeddy = async (idteddy) => {
    article.innerHTML =`
             <div class="col-sm-10 col-md-8 col-lg-6 mx-auto">
                <div class="card h-100">
-                  <a href="produit.html"><img class="card-img-top" src="${data.imageUrl}" alt="photographie d'un ourson en peluche"></a>
+                  <img class="card-img-top" src="${data.imageUrl}" alt="photographie d'un ourson en peluche">
                   <div class="card-body">
-                     <h4 class="card-title">
-                        <a href="produit.html">${data.name}</a>
-                     </h4>
+                     <h4 class="card-title text-primary">${data.name}</h4>
                      <h5>$${data.price}</h5>
                      <p class="card-text">${data.description}</p>
                   </div>
-                  <ul class="list-group list-group-flush">
-                     <li class="list-group-item"">
-                        <label for="couleur">Couleur :</label>
-                        <select class="custom-select" name="couleur" id="couleur">
-                           ${listeDesCouleurs}
-                        </select>
-                     </li>
-                     <li class="list-group-item"">
-                     <label for="quantite">Quantité :</label>
-                        <input type="number" class="form-control" name="quantite" id="quantite" min="1" value="1">
-                     </li>
-                  </ul>
-                  <div class="card-footer text-center">
-                     <button type="button" class="btn btn-secondary">Ajouter au panier</button>
-                  </div>
+                     <ul class="list-group list-group-flush">
+                        <li class="list-group-item"">
+                           <label for="couleur">Couleur :</label>
+                           <select class="custom-select" name="couleur" id="couleur">
+                              ${listeDesCouleurs}
+                           </select>
+                        </li>
+                        <li class="list-group-item"">
+                           <label for="quantite">Quantité :</label>
+                           <input type="number" class="form-control" name="quantite" id="quantite" min="1" value="1">
+                        </li>
+                     </ul>
+                     <div class="card-footer text-center">
+                        <button id="test" type="button" class="btn btn-secondary" onclick="recupereQuantite(document.querySelector('#quantite').value)">Ajouter au panier</button>
+                     </div>
                </div>
             </div>`;
 };
 
 afficherUnTeddy(idTeddy);
+
+function recupereQuantite(quantite) {
+   console.log(quantite);
+}

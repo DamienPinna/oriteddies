@@ -5,7 +5,6 @@
 const afficherTeddies = async () => {
    const data = await get('http://localhost:3000/api/teddies');
    const articles = document.querySelector('#articles');
-   console.log(data)
    let teddies = ""; 
    for (let teddy of data) {
       teddies +=`

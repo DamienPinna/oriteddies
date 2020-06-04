@@ -2,12 +2,12 @@ const idTeddy = document.location.hash.substring(1); //Récupération de l'id pr
 
 /**
  * Permet d'afficher un produit en fonction de l'id transmis par la page index.html.
- * @param {String} idteddy 
+ * @param {String} idTeddy 
  */
-const afficherUnTeddy = async (idteddy) => {
-   const data = await get(`http://localhost:3000/api/teddies/${idteddy}`);
+const afficherUnTeddy = async (idTeddy) => {
+   const data = await get(`http://localhost:3000/api/teddies/${idTeddy}`);
    const article = document.querySelector('#article');
-   console.log(data)
+   // console.log(data)
 
    //Je créé dynamiquement la liste de couleurs
    let listeDesCouleurs = "";
@@ -37,7 +37,7 @@ const afficherUnTeddy = async (idteddy) => {
                         </li>
                      </ul>
                      <div class="card-footer text-center">
-                        <button id="test" type="button" class="btn btn-secondary" onclick="recupereQuantite(document.querySelector('#quantite').value)">Ajouter au panier</button>
+                        <button id="test" type="button" class="btn btn-secondary" onclick="ajoutTeddyLocalStorage(idTeddy, document.querySelector('#quantite').value)">Ajouter au panier</button>
                      </div>
                </div>
             </div>`;
@@ -45,6 +45,13 @@ const afficherUnTeddy = async (idteddy) => {
 
 afficherUnTeddy(idTeddy);
 
-function recupereQuantite(quantite) {
-   console.log(quantite);
+/**
+ * Fonction qui permet d'ajouter le produit dans le localStorage.
+ * @param {String} idTeddy 
+ * @param {Number} quantite 
+ */
+const ajoutTeddyLocalStorage = async (idTeddy, quantite) => {
+   let data = await get(`http://localhost:3000/api/teddies/${idTeddy}`);
+   data = JSON.stringify(data);
+   localStorage.setItem(idTeddy, data);
 }

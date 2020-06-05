@@ -2,7 +2,7 @@ const idTeddy = document.location.hash.substring(1); //Récupération de l'id pr
 
 /**
  * Permet d'afficher un produit en fonction de l'id transmis par la page index.html.
- * @param {String} idTeddy 
+ * @param {String} idTeddy id de l'article sélectionné
  */
 const afficherUnTeddy = async (idTeddy) => {
    const data = await get(`http://localhost:3000/api/teddies/${idTeddy}`);
@@ -47,11 +47,12 @@ afficherUnTeddy(idTeddy);
 
 /**
  * Fonction qui permet d'ajouter le produit dans le localStorage.
- * @param {String} idTeddy 
- * @param {Number} quantite 
+ * @param {String} idTeddy id de l'article sélectionné
+ * @param {Number} quantite quantité d'articles sélectionné par l'utilisateur
  */
 const ajoutTeddyLocalStorage = async (idTeddy, quantite) => {
    let data = await get(`http://localhost:3000/api/teddies/${idTeddy}`);
+   data.quantite = quantite;
    data = JSON.stringify(data);
    localStorage.setItem(idTeddy, data);
 }

@@ -24,21 +24,21 @@ const afficherUnTeddy = async (idTeddy) => {
                      <h5>$${data.price}</h5>
                      <p class="card-text">${data.description}</p>
                   </div>
-                     <ul class="list-group list-group-flush">
-                        <li class="list-group-item"">
-                           <label for="couleur">Couleur :</label>
-                           <select class="custom-select" name="couleur" id="couleur">
-                              ${listeDesCouleurs}
-                           </select>
-                        </li>
-                        <li class="list-group-item"">
-                           <label for="quantite">Quantité :</label>
-                           <input type="number" class="form-control" name="quantite" id="quantite" min="1" value="1">
-                        </li>
-                     </ul>
-                     <div class="card-footer text-center">
-                        <button id="test" type="button" class="btn btn-secondary" onclick="ajoutTeddyLocalStorage(idTeddy, document.querySelector('#quantite').value)">Ajouter au panier</button>
-                     </div>
+                  <ul class="list-group list-group-flush">
+                     <li class="list-group-item"">
+                        <label for="couleur">Couleur :</label>
+                        <select class="custom-select" name="couleur" id="couleur">
+                           ${listeDesCouleurs}
+                        </select>
+                     </li>
+                     <li class="list-group-item"">
+                        <label for="quantite">Quantité :</label>
+                        <input type="number" class="form-control" name="quantite" id="quantite" min="1" value="1">
+                     </li>
+                  </ul>
+                  <div class="card-footer text-center">
+                     <button id="test" type="button" class="btn btn-secondary" data-toggle="modal" data-target="#confirmationAjoutPanier" onclick="ajoutTeddyLocalStorage(idTeddy, document.querySelector('#quantite').value)">Ajouter au panier</button>
+                  </div>
                </div>
             </div>`;
 };
@@ -51,8 +51,8 @@ afficherUnTeddy(idTeddy);
  * @param {Number} quantite quantité d'articles sélectionné par l'utilisateur
  */
 const ajoutTeddyLocalStorage = async (idTeddy, quantite) => {
-   let data = await get(`http://localhost:3000/api/teddies/${idTeddy}`);
-   data.quantite = quantite;
-   data = JSON.stringify(data);
-   localStorage.setItem(idTeddy, data);
+   let data = await get(`http://localhost:3000/api/teddies/${idTeddy}`); //Récupération de l'objet sélectionné.
+   data.quantite = quantite; //Ajout de la quantité dans l'objet data.
+   data = JSON.stringify(data); //Convertion au format JSON.
+   localStorage.setItem(idTeddy, data); //Ajout de l'objet JSON dans le localStorage.
 }

@@ -55,4 +55,4 @@ const ajoutTeddyLocalStorage = async (idTeddy, quantite) => {
    data.quantite = quantite; //Ajout de la quantité dans l'objet data.
    data = JSON.stringify(data); //Convertion au format JSON.
    localStorage.setItem(idTeddy, data); //Ajout de l'objet JSON dans le localStorage.
-}
+};

@@ -51,8 +51,18 @@ afficherUnTeddy(idTeddy);
  * @param {Number} quantite quantité d'articles sélectionné par l'utilisateur
  */
 const ajoutTeddyLocalStorage = async (idTeddy, quantite) => {
-   let data = await get(`http://localhost:3000/api/teddies/${idTeddy}`); //Récupération de l'objet sélectionné.
-   data.quantite = quantite; //Ajout de la quantité dans l'objet data.
-   data = JSON.stringify(data); //Convertion au format JSON.
-   localStorage.setItem(idTeddy, data); //Ajout de l'objet JSON dans le localStorage.
+   let data = await get(`http://localhost:3000/api/teddies/${idTeddy}`);
+   data.quantite = quantite;
+   let tabProduitsPanier = localStorage.getItem('produitsPanier');
+
+   if (tabProduitsPanier == null) {
+      tabProduitsPanier = [data];
+      tabProduitsPanier = JSON.stringify(tabProduitsPanier);
+      localStorage.setItem('produitsPanier', tabProduitsPanier);
+   } else {
+      tabProduitsPanier = JSON.parse(tabProduitsPanier);
+      tabProduitsPanier.push(data);
+      tabProduitsPanier = JSON.stringify(tabProduitsPanier);
+      localStorage.setItem('produitsPanier', tabProduitsPanier);
+   }
 };

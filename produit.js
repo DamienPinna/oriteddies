@@ -46,6 +46,15 @@ const afficherUnTeddy = async (idTeddy) => {
 afficherUnTeddy(idTeddy);
 
 /**
+ * Fonction qui permet d'ajouter dans le localStorage ce qui est passé en paramètre.
+ * @param {Array} tabProduitsPanier tableau comprement un ou des objects correspondant à une article.
+ */
+const ajouterDansLocalStorage = (tabProduitsPanier) => {
+   tabProduitsPanier = JSON.stringify(tabProduitsPanier);
+   localStorage.setItem('produitsPanier', tabProduitsPanier);
+};
+
+/**
  * Fonction qui permet d'ajouter le produit dans le localStorage.
  * @param {String} idTeddy id de l'article sélectionné
  * @param {Number} quantite quantité d'articles sélectionné par l'utilisateur
@@ -57,12 +66,10 @@ const ajoutTeddyLocalStorage = async (idTeddy, quantite) => {
 
    if (tabProduitsPanier == null) {
       tabProduitsPanier = [data];
-      tabProduitsPanier = JSON.stringify(tabProduitsPanier);
-      localStorage.setItem('produitsPanier', tabProduitsPanier);
+      ajouterDansLocalStorage(tabProduitsPanier);
    } else {
       tabProduitsPanier = JSON.parse(tabProduitsPanier);
       tabProduitsPanier.push(data);
-      tabProduitsPanier = JSON.stringify(tabProduitsPanier);
-      localStorage.setItem('produitsPanier', tabProduitsPanier);
+      ajouterDansLocalStorage(tabProduitsPanier);
    }
 };

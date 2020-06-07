@@ -56,8 +56,7 @@ const afficherTabPanier = teddies => {
  */
 const supprimerLignePanier = index => {
    tabObjetsLocalStorage.splice(index, 1);
-   tabObjetsLocalStorage = JSON.stringify(tabObjetsLocalStorage);
-   localStorage.setItem('produitsPanier', tabObjetsLocalStorage);
+   ajouterDansLocalStorage(tabObjetsLocalStorage);
    document.location.reload();
 }
 

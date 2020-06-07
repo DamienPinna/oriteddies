@@ -3,12 +3,12 @@
  * @param {Object} teddy correspond à un élement du tableau de produit(s).
  * @returns {String} // String ? à confirmer avec Babacar.
  */
-const creerLignePanier = teddy => {
+const creerLignePanier = (teddy, index) => {
    const tr = document.createElement('tr');
-
+ 
    const thSupprimer = document.createElement('th');
    thSupprimer.setAttribute('scope', 'row');
-   thSupprimer.innerHTML= "<i class='fas fa-times-circle'></i>";
+   thSupprimer.innerHTML= `<i onclick="supprimerLignePanier('${index}')" class="fas fa-times-circle"></i>`;
    tr.appendChild(thSupprimer);
 
    const tdArticle = document.createElement('td');
@@ -42,11 +42,23 @@ const afficherTabPanier = teddies => {
 
    const newTeddies = teddies.map(e => ({...e, sousTotal: e.quantite * e.price})); //Création d'une projection du tableau teddies nommée newTeddies et ajout du sous total.
 
-   newTeddies.forEach(teddy => tbody.appendChild(creerLignePanier(teddy)));
+   newTeddies.forEach((teddy, index) => tbody.appendChild(creerLignePanier(teddy, index)));
 
    const prixTotalDuPanier = newTeddies.reduce((acc, teddy) => acc + teddy.sousTotal, 0); //On additionne le sous total à chaque itération pour avoir le total.
 
    total.innerText = `$${prixTotalDuPanier}`;
+}
+
+
+/**
+ * Fonction qui permet de supprimer un objet du tableau se trouvant dans le localStorage.
+ * @param {*} index position du clique sur un bouton "supprimer".
+ */
+const supprimerLignePanier = index => {
+   tabObjetsLocalStorage.splice(index, 1);
+   tabObjetsLocalStorage = JSON.stringify(tabObjetsLocalStorage);
+   localStorage.setItem('produitsPanier', tabObjetsLocalStorage);
+   document.location.reload();
 }
 
 afficherTabPanier(tabObjetsLocalStorage);

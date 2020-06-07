@@ -34,4 +34,4 @@ const getTabLocalStorage = () => {
    return tabProduitsPanier;
 }
 
-const tabObjetsLocalStorage = getTabLocalStorage();
+let tabObjetsLocalStorage = getTabLocalStorage();

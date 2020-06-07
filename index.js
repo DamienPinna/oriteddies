@@ -28,3 +28,5 @@ const afficherTeddies = async () => {
 };
 
 afficherTeddies();
+
+afficherCompteurPanier();

@@ -74,3 +74,5 @@ const ajoutTeddyLocalStorage = async (idTeddy, quantite) => {
       ajouterDansLocalStorage(tabProduitsPanier);
    }
 };
+
+afficherCompteurPanier();

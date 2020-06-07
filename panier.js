@@ -1,16 +1,4 @@
 /**
- * Fonction qui permet de récupérer le tableau d'objet(s) stocké dans le localStorage.
- * @returns {Array}
- */
-const getTabLocalStorage = () => {
-   let tabProduitsPanier = localStorage.getItem('produitsPanier');
-   tabProduitsPanier = JSON.parse(tabProduitsPanier);
-   return tabProduitsPanier;
-}
-
-const tabObjetsLocalStorage = getTabLocalStorage();
-
-/**
  * Fonction qui permet de créer une ligne du panier en HTML.
  * @param {Object} teddy correspond à un élement du tableau de produit(s).
  * @returns {String} // String ? à confirmer avec Babacar.
@@ -62,15 +50,5 @@ const afficherTabPanier = teddies => {
 }
 
 afficherTabPanier(tabObjetsLocalStorage);
-
-
-/**
- * Fonction qui permet d'afficher à coté de l'icône panier la quantité d'articles se trouvant dans le panier.
- */
-const afficherCompteurPanier = () => {
-   const compteurPanier = tabObjetsLocalStorage.reduce((acc, teddy) => acc + parseInt(teddy.quantite), 0);
-   const badge = document.querySelector('.badge');
-   badge.innerHTML = compteurPanier;
-}
 
 afficherCompteurPanier();

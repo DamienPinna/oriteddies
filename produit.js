@@ -44,6 +44,7 @@ const afficherUnTeddy = async (idTeddy) => {
 
 afficherUnTeddy(idTeddy);
 
+
 /**
  * Fonction qui permet d'ajouter dans le localStorage ce qui est passé en paramètre.
  * @param {Array} tabProduitsPanier tableau comprenant un ou des objects correspondant à un article.
@@ -52,6 +53,7 @@ const ajouterDansLocalStorage = (tabProduitsPanier) => {
    tabProduitsPanier = JSON.stringify(tabProduitsPanier);
    localStorage.setItem('produitsPanier', tabProduitsPanier);
 };
+
 
 /**
  * Fonction qui permet d'ajouter le produit dans le localStorage.

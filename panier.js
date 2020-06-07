@@ -1,31 +1,65 @@
 /**
- * Fonction qui permet de retourner le produit de 2 nombres.
- * @param {Number} quantite quantité d'article(s) d'une ligne du panier.
- * @param {Number} price prix d'un article.
- * @returns {Number} retourne le produit de la quantité par le prix d'un article.
+ * Fonction qui permet de récupérer le tableau d'objet(s) stocké dans le localStorage.
+ * @returns {Array}
  */
-const calculSousTotalUnArticle = (quantite, price) => quantite * price;
-
-/**
- * Fonction qui permet d'afficher dans le navigateur les produits que l'utilisateur a mis dans le panier.
- */
-const afficherListePanier = () => {
+const getTabLocalStorage = () => {
    let tabProduitsPanier = localStorage.getItem('produitsPanier');
    tabProduitsPanier = JSON.parse(tabProduitsPanier);
+   return tabProduitsPanier;
+}
 
-   let lignesPanier = "";
-   let listePanier = document.querySelector('tbody');
-   for (let teddie of tabProduitsPanier) {
-      lignesPanier += `
-         <tr>
-            <th scope="row"><i class="fas fa-times-circle"></i></th>
-            <td>${teddie.name}</td>
-            <td class="w-25"><img src="${teddie.imageUrl}" alt="photographie de l'ourson ${teddie.name}" class="img-thumbnail"></td>
-            <td>${teddie.quantite}</td>
-            <td>$${calculSousTotalUnArticle(teddie.quantite, teddie.price)}</td>
-         </tr>`;
-   }
-   listePanier.innerHTML = lignesPanier;
-};
 
-afficherListePanier();
+/**
+ * Fonction qui permet de créer une ligne du panier en HTML.
+ * @param {Object} teddy correspond à un élement du tableau de produit(s).
+ * @returns {String} // String ? à confirmer avec Babacar.
+ */
+const creerLignePanier = teddy => {
+   const tr = document.createElement('tr');
+
+   const thSupprimer = document.createElement('th');
+   thSupprimer.setAttribute('scope', 'row');
+   thSupprimer.innerHTML= "<i class='fas fa-times-circle'></i>";
+   tr.appendChild(thSupprimer);
+
+   const tdArticle = document.createElement('td');
+   tdArticle.innerText = teddy.name;
+   tr.appendChild(tdArticle);
+
+   const tdImage = document.createElement('td');
+   tdImage.classList.add('w-25');
+   tdImage.innerHTML = `<img src="${teddy.imageUrl}" alt="photographie de l'ourson ${teddy.name}" class="img-thumbnail"></img>`;
+   tr.appendChild(tdImage);
+
+   const tdQuantite = document.createElement('td');
+   tdQuantite.innerText = teddy.quantite;
+   tr.appendChild(tdQuantite);
+
+   const tdPrix = document.createElement('td');
+   tdPrix.innerText = `$${teddy.sousTotal}`;
+   tr.appendChild(tdPrix);
+   
+   return tr;
+}
+
+
+/**
+ * Fonction qui permet d'afficher sur le navigateur la liste des produits du panier.
+ * @param {Array} teddies 
+ */
+const afficherTabPanier = teddies => {
+   const tbody = document.querySelector('tbody');
+   const total = document.querySelector('.total');
+
+   const newTeddies = teddies.map(e => ({...e, sousTotal: e.quantite * e.price})); //Création d'une projection du tableau teddies nommée newTeddies et ajout du sous total.
+
+   newTeddies.forEach(teddy => tbody.appendChild(creerLignePanier(teddy)));
+
+   const prixTotalDuPanier = newTeddies.reduce((acc, teddy) => acc + teddy.sousTotal, 0); //On additionne le sous total à chaque itération pour avoir le total.
+
+   total.innerText = `$${prixTotalDuPanier}`;
+}
+
+const tabObjetsLocalStorage = getTabLocalStorage();
+
+afficherTabPanier(tabObjetsLocalStorage);

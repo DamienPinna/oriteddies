@@ -1,4 +1,17 @@
 /**
+ * Fonction qui permet de récupérer le tableau d'objet(s) stocké dans le localStorage.
+ * @returns {Array}
+ */
+const getTabLocalStorage = () => {
+   let tabProduitsPanier = localStorage.getItem('produitsPanier');
+   tabProduitsPanier = JSON.parse(tabProduitsPanier);
+   return tabProduitsPanier;
+}
+
+let tabObjetsLocalStorage = getTabLocalStorage();
+
+
+/**
  * Fonction qui permet d'effectuer des requêtes GET à la base de données.
  * @param {String} url
  * @returns {Promise}
@@ -24,14 +37,30 @@ const get = async (url) => {
    }
 };
 
-/**
- * Fonction qui permet de récupérer le tableau d'objet(s) stocké dans le localStorage.
- * @returns {Array}
- */
-const getTabLocalStorage = () => {
-   let tabProduitsPanier = localStorage.getItem('produitsPanier');
-   tabProduitsPanier = JSON.parse(tabProduitsPanier);
-   return tabProduitsPanier;
-}
 
-let tabObjetsLocalStorage = getTabLocalStorage();
+/**
+ * Fonction qui permet d'effectuer une requête POST au serveur.
+ * @param {Objet} dataCommande données venant du formulaire de contact.
+ */
+const insertPost = async dataCommande => {
+   const response = await fetch('http://localhost:3000/api/teddies/order', {
+      method: 'POST',
+      headers: {
+         'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(dataCommande)
+   });
+   const responseData = await response.json();
+   console.log(responseData);
+};
+
+insertPost({
+   contact: {
+      firstName: 'damien',
+      lastName: 'pinna',
+      address: 'adresse',
+      city: 'ville',
+      email: 'email'
+      },
+      products: ['5beaacd41c9d440000a57d97']
+});

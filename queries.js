@@ -51,16 +51,5 @@ const insertPost = async dataCommande => {
       body: JSON.stringify(dataCommande)
    });
    const responseData = await response.json();
-   console.log(responseData);
+   // console.log(responseData);
 };
-
-insertPost({
-   contact: {
-      firstName: 'damien',
-      lastName: 'pinna',
-      address: 'adresse',
-      city: 'ville',
-      email: 'email'
-      },
-      products: ['5beaacd41c9d440000a57d97']
-});

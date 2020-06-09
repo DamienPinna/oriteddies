@@ -41,6 +41,7 @@ const get = async (url) => {
 /**
  * Fonction qui permet d'effectuer une requête POST au serveur.
  * @param {Objet} dataCommande données venant du formulaire de contact.
+ * @returns {Objet} retourne un objet d'objets comprenant le contact, les produits et l'orderId.
  */
 const insertPost = async dataCommande => {
    const response = await fetch('http://localhost:3000/api/teddies/order', {
@@ -51,5 +52,6 @@ const insertPost = async dataCommande => {
       body: JSON.stringify(dataCommande)
    });
    const responseData = await response.json();
-   // console.log(responseData);
+   console.log(responseData);
+   return responseData;
 };

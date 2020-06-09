@@ -60,42 +60,37 @@ const supprimerLignePanier = index => {
    document.location.reload();
 }
 
-let firstName = "";
-let lastName = "";
-let adresse = "";
-let city = "";
-let email = "";
-let products = [];
 
-let order = {
-   contact: {
-      firstName: firstName,
-      lastName: lastName,
-      address: adresse,
-      city: city,
-      email: email
-      },
-      products: [products]
-};
-
+/**
+ * Permet au clique sur le bouton commander d'envoyer les informations de commande au serveur.
+ */
 document.querySelector('#order').addEventListener('click', () => {
-   console.log('test');
- 
+   event.preventDefault();
+
+   const order = {
+      contact: {
+         firstName: String,
+         lastName: String,
+         address: String,
+         city: String,
+         email: String
+         },
+      products: [String]
+   };
+   
+   order.contact.firstName = document.querySelector('#firstName').value;
+   order.contact.lastName = document.querySelector('#lastName').value;
+   order.contact.address = document.querySelector('#address').value;
+   order.contact.city = document.querySelector('#city').value;
+   order.contact.email = document.querySelector('#email').value;
+
+   const products = tabObjetsLocalStorage.map(e => e._id);
+   order.products = products;
+   
+   insertPost(order);
+   document.querySelector('form').reset();
 });
 
-console.log(order);
-
-
-insertPost({
-   contact: {
-      firstName: 'damien',
-      lastName: 'pinna',
-      address: 'adresse',
-      city: 'ville',
-      email: 'email'
-      },
-      products: ['5beaacd41c9d440000a57d97']
-});
 
 afficherTabPanier(tabObjetsLocalStorage);
 

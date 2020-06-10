@@ -1,7 +1,7 @@
 /**
  * Fonction qui permet de créer une ligne du panier en HTML.
  * @param {Object} teddy correspond à un élement du tableau de produit(s).
- * @returns {String} // String ? à confirmer avec Babacar.
+ * @returns {String}
  */
 const creerLignePanier = (teddy, index) => {
    const tr = document.createElement('tr');
@@ -56,16 +56,16 @@ const afficherTabPanier = teddies => {
  */
 const supprimerLignePanier = index => {
    tabObjetsLocalStorage.splice(index, 1);
-   ajouterDansLocalStorage(tabObjetsLocalStorage);
+   ajouterProduitDansLocalStorage(tabObjetsLocalStorage);
    document.location.reload();
 }
 
 
 /**
- * Permet au clique sur le bouton commander d'envoyer les informations de commande au serveur.
+ * Permet au clique sur le bouton commander d'envoyer les informations de la commande au serveur.
  */
 document.querySelector('#order').addEventListener('click', () => {
-   event.preventDefault();
+   // event.preventDefault();
 
    const order = {
       contact: {
@@ -87,10 +87,8 @@ document.querySelector('#order').addEventListener('click', () => {
    const products = tabObjetsLocalStorage.map(e => e._id);
    order.products = products;
    
-   insertPost(order);
-   document.querySelector('form').reset();
+   insertPost(order).then(responseData => ajouterCommandeDansLocalStorage(responseData));
 });
-
 
 afficherTabPanier(tabObjetsLocalStorage);
 

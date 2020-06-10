@@ -36,7 +36,7 @@ const afficherUnTeddy = async (idTeddy) => {
                      </li>
                   </ul>
                   <div class="card-footer text-center">
-                     <button id="test" type="button" class="btn btn-secondary" data-toggle="modal" data-target="#confirmationAjoutPanier" onclick="ajoutTeddyLocalStorage(idTeddy, document.querySelector('#quantite').value)">Ajouter au panier</button>
+                     <button id="ajoutPanier" type="button" class="btn btn-secondary" data-toggle="modal" data-target="#confirmationAjoutPanier" onclick="ajoutTeddyLocalStorage(idTeddy, document.querySelector('#quantite').value)">Ajouter au panier</button>
                   </div>
                </div>
             </div>`;
@@ -57,11 +57,11 @@ const ajoutTeddyLocalStorage = async (idTeddy, quantite) => {
 
    if (tabProduitsPanier == null) {
       tabProduitsPanier = [data];
-      ajouterDansLocalStorage(tabProduitsPanier);
+      ajouterProduitDansLocalStorage(tabProduitsPanier);
    } else {
       tabProduitsPanier = JSON.parse(tabProduitsPanier);
       tabProduitsPanier.push(data);
-      ajouterDansLocalStorage(tabProduitsPanier);
+      ajouterProduitDansLocalStorage(tabProduitsPanier);
    }
 };
 

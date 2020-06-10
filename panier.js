@@ -1,3 +1,14 @@
+order = {
+   contact: {
+      firstName: String,
+      lastName: String,
+      address: String,
+      city: String,
+      email: String
+      },
+   products: [String]
+};
+
 /**
  * Fonction qui permet de créer une ligne du panier en HTML.
  * @param {Object} teddy correspond à un élement du tableau de produit(s).
@@ -62,21 +73,9 @@ const supprimerLignePanier = index => {
 
 
 /**
- * Permet au clique sur le bouton commander d'envoyer les informations de la commande au serveur.
+ * Permet au clique sur le bouton commander d'envoyer les informations de la commande au serveur et d'enregistrer le retour dans la sessionStorage.
  */
 document.querySelector('#order').addEventListener('click', () => {
-   // event.preventDefault();
-
-   const order = {
-      contact: {
-         firstName: String,
-         lastName: String,
-         address: String,
-         city: String,
-         email: String
-         },
-      products: [String]
-   };
    
    order.contact.firstName = document.querySelector('#firstName').value;
    order.contact.lastName = document.querySelector('#lastName').value;
@@ -87,7 +86,8 @@ document.querySelector('#order').addEventListener('click', () => {
    const products = tabObjetsLocalStorage.map(e => e._id);
    order.products = products;
    
-   insertPost(order).then(responseData => ajouterCommandeDansLocalStorage(responseData));
+   insertPost(order).then(responseData => ajouterCommandeDansSessionStorage(responseData));
+   
 });
 
 afficherTabPanier(tabObjetsLocalStorage);

@@ -12,7 +12,7 @@ const ajouterProduitDansLocalStorage = tabProduitsPanier => {
  * 
  * @param {String} responseData réponse du serveur au format JSON de l'objet contact, un tableau des produits commandés et l'id de la commande.
  */
-const ajouterCommandeDansLocalStorage = responseData => { localStorage.setItem('order', responseData) };
+const ajouterCommandeDansSessionStorage = responseData => { sessionStorage.setItem('order', responseData) };
 
 
 /**

@@ -39,7 +39,7 @@ const get = async (url) => {
 
 
 /**
- * Fonction qui permet d'effectuer une requête POST au serveur.
+ * Fonction qui permet d'effectuer une requête POST au serveur puis redirige vers la page de confirmation de commande.
  * @param {Objet} dataCommande données venant du formulaire de contact.
  * @returns {String} retourne au format JSON l'objet contact, le tableau des produits et l'id de commande.
  */
@@ -52,6 +52,6 @@ const insertPost = async dataCommande => {
       body: JSON.stringify(dataCommande)
    });
    const responseData = await response.text();
-   
+   window.location.href = 'confirm_order.html'
    return responseData;
 };

@@ -1,14 +1,23 @@
 /**
- * Fonction qui permet de récupérer le tableau d'objet(s) stocké dans le localStorage.
- * @returns {Array}
+ * Fonction qui permet de récupérer au format JS le tableau d'objet(s) stocké dans le localStorage.
+ * @returns {Array} format JavaScript.
  */
 const getTabLocalStorage = () => {
    let tabProduitsPanier = localStorage.getItem('produitsPanier');
    tabProduitsPanier = JSON.parse(tabProduitsPanier);
    return tabProduitsPanier;
-}
+};
 
-let tabObjetsLocalStorage = getTabLocalStorage();
+
+/**
+ * Fonction qui permet de récupérer au format JS l'objet comprenant l'objet contact, le tableau de produits et l'id de la commande.
+ * @returns {Object} format JavaScript.
+ */
+const getTabSessionStorage = () => {
+   let tabInfosOrder = sessionStorage.getItem('order');
+   tabInfosOrder = JSON.parse(tabInfosOrder);
+   return tabInfosOrder;
+};
 
 
 /**
@@ -55,3 +64,5 @@ const insertPost = async dataCommande => {
    window.location.href = 'confirm_order.html'
    return responseData;
 };
+
+let tabObjetsLocalStorage = getTabLocalStorage();

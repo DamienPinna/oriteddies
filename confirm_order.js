@@ -13,11 +13,11 @@ const infosOrder = () => {
  * Fonction qui permet d'afficher la référence et le prix total de la commande effectuée.
  */
 const afficherInfosOrder = () => {
-   const tabInfosOrder = infosOrder();
+   const [refOrder, prixTotal] = infosOrder();
    const infosCommande = document.querySelector('.infos-commande');
    let txt = `
-      <p class="ref-commmande pt-3">Référence (à conserver) : ${tabInfosOrder[0]}</p>
-      <p class="prix-total pb-3">Montant total : $${tabInfosOrder[1]}</p>`
+      <p class="ref-commmande pt-3">Référence (à conserver) : ${refOrder}</p>
+      <p class="prix-total pb-3">Montant total : $${prixTotal}</p>`
    
    infosCommande.innerHTML = txt;
 }

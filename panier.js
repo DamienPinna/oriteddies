@@ -40,7 +40,7 @@ const creerLignePanier = (teddy, index) => {
    tr.appendChild(tdPrix);
    
    return tr;
-}
+};
 
 
 /**
@@ -58,7 +58,7 @@ const afficherTabPanier = teddies => {
    const prixTotalDuPanier = newTeddies.reduce((acc, teddy) => acc + teddy.sousTotal, 0); //On additionne le sous total à chaque itération pour avoir le total.
 
    total.innerText = `$${prixTotalDuPanier}`;
-}
+};
 
 
 /**
@@ -69,7 +69,16 @@ const supprimerLignePanier = index => {
    tabObjetsLocalStorage.splice(index, 1);
    ajouterProduitDansLocalStorage(tabObjetsLocalStorage);
    document.location.reload();
-}
+};
+
+
+/**
+ * Fonctionner permettant de supprimer l'item produitsPanier du localStorage et de raffraichir la page.
+ */
+const deletePanier = () => {
+   localStorage.removeItem('produitsPanier');
+   document.location.reload();
+};
 
 
 /**
@@ -87,9 +96,15 @@ document.querySelector('#order').addEventListener('click', () => {
    order.products = products;
    
    insertPost(order).then(responseData => ajouterCommandeDansSessionStorage(responseData));
-   
+   // localStorage.removeItem('produitsPanier');
 });
 
-afficherTabPanier(tabObjetsLocalStorage);
-
-afficherCompteurPanier();
+//Affichage :
+if (localStorage.getItem('produitsPanier') === null || localStorage.getItem('produitsPanier') === "[]") {
+   document.querySelector('#content').classList.add('d-none');
+   document.querySelector('footer').classList.add('fixed-bottom');
+} else {
+   document.querySelector('#emptyPanier').classList.add('d-none');
+   afficherTabPanier(tabObjetsLocalStorage);
+   afficherCompteurPanier();
+}

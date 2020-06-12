@@ -84,7 +84,8 @@ const deletePanier = () => {
 /**
  * Permet au clique sur le bouton commander d'envoyer les informations de la commande au serveur et d'enregistrer le retour dans la sessionStorage.
  */
-document.querySelector('#order').addEventListener('click', () => {
+document.querySelector('form').addEventListener('submit', (event) => {
+   event.preventDefault();
    
    order.contact.firstName = document.querySelector('#firstName').value;
    order.contact.lastName = document.querySelector('#lastName').value;

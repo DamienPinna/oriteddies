@@ -1,5 +1,5 @@
 /**
- * Permet d'afficher tous les articles dans le navigateur
+ * Permet d'afficher tous les articles dans le navigateur.
  * @returns {Promise}
  */
 const afficherTeddies = async () => {
@@ -28,3 +28,5 @@ const afficherTeddies = async () => {
 };
 
 afficherTeddies();
+
+afficherCompteurPanier();

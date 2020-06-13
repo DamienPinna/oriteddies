@@ -10,8 +10,9 @@
 
       <link rel="stylesheet" href="style.css">
       <script src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"></script>
-      <script src="./query.js"></script>
-      <script src="./produit.js"></script>
+      <script src="./common.js"></script>
+      <script src="./queries.js"></script>
+      <script defer src="./produit.js"></script>
       
    </head>
    <body>
@@ -34,7 +35,7 @@
                    </a>
                  </li>
                  <li class="nav-item">
-                   <a class="nav-link" href="./panier.html">Panier<i class="fas fa-shopping-cart ml-1"></i><span class="badge badge-light ml-2">4</span></a>
+                   <a class="nav-link" href="./panier.html">Panier<i class="fas fa-shopping-cart ml-1"></i><span class="badge badge-light ml-2"></span></a>
                  </li>
                </ul>
              </div>
@@ -76,7 +77,7 @@
       <!-- /Footer -->
 
       <!-- Modal -->
-      <div class="modal fade" id="confirmationAjoutPanier" tabindex="-1" role="dialog" aria-labelledby="confirmationAjoutPanier" aria-hidden="true">
+      <div class="modal fade" id="confirmationAjoutPanier" data-keyboard="false" tabindex="-1" role="dialog" aria-labelledby="confirmationAjoutPanier" aria-hidden="true">
          <div class="modal-dialog">
             <div class="modal-content">
                <div class="modal-header">

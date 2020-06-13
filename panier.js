@@ -96,8 +96,12 @@ document.querySelector('form').addEventListener('submit', (event) => {
    const products = tabObjetsLocalStorage.map(e => e._id);
    order.products = products;
    
-   insertPost(order).then(responseData => ajouterCommandeDansSessionStorage(responseData));
-   // localStorage.removeItem('produitsPanier');
+   insertPost(order)
+   .then(responseData => ajouterCommandeDansSessionStorage(responseData))
+   .then( () => { 
+      localStorage.removeItem('produitsPanier'); 
+      window.location.href = 'confirm_order.html';
+   });
 });
 
 //Affichage :

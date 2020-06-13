@@ -4,7 +4,7 @@
  */
 const getTabLocalStorage = () => {
    let tabProduitsPanier = localStorage.getItem('produitsPanier');
-   tabProduitsPanier = JSON.parse(tabProduitsPanier);
+   tabProduitsPanier = JSON.parse(tabProduitsPanier) || [];
    return tabProduitsPanier;
 };
 
@@ -37,13 +37,13 @@ const get = async (url) => {
          alert.parentElement.classList.remove('d-none');
          alert.textContent = `Erreur ${response.status}`;
          return [];
-      }
+      };
    } catch (error) {
       console.log(error);
       const alert = document.querySelector('.alert');
       alert.parentElement.classList.remove('d-none');
       alert.textContent = error;
-   }
+   };
 };
 
 
@@ -61,8 +61,11 @@ const insertPost = async dataCommande => {
       body: JSON.stringify(dataCommande)
    });
    const responseData = await response.text();
-   window.location.href = 'confirm_order.html'
-   return responseData;
+   if (response.ok) {
+      return responseData;
+   } else {
+      console.log('erreur 400 ou 500');
+   };
 };
 
 let tabObjetsLocalStorage = getTabLocalStorage();

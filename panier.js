@@ -1,3 +1,13 @@
+window.onload = () => {
+   const lesBoutonsSup = document.querySelectorAll('.supprimerUneLigne');
+   for (const unBoutonSup of lesBoutonsSup) {
+      unBoutonSup.addEventListener('click', () => {
+      const index = unBoutonSup.querySelector('input').value;
+      supprimerLignePanier(index);
+      })
+   };
+};
+
 let order = {
    contact: {
       firstName: String,
@@ -76,17 +86,18 @@ const supprimerLignePanier = index => {
 
 
 /**
- * Fonctionner permettant de supprimer l'item produitsPanier du localStorage et de raffraichir la page.
+ * Permet de supprimer l'item produitsPanier du localStorage et de raffraichir la page au clique sur le bouton "vider le panier".
  */
 document.querySelector('#viderPanier').addEventListener('click', () => {
    localStorage.removeItem('produitsPanier');
    document.location.reload();
 });
 
+
 /**
- * Permet au clique sur le bouton commander d'envoyer les informations de la commande au serveur et d'enregistrer le retour dans la sessionStorage.
+ * Permet au clique sur le bouton "commander" d'envoyer les informations de la commande au serveur et d'enregistrer le retour dans la sessionStorage.
  */
-document.querySelector('form').addEventListener('submit', (event) => {
+document.querySelector('form').addEventListener('submit', event => {
    event.preventDefault();
    
    order.contact.firstName = document.querySelector('#firstName').value;
@@ -112,18 +123,7 @@ if (localStorage.getItem('produitsPanier') === null || localStorage.getItem('pro
    document.querySelector('footer').classList.add('fixed-bottom');
 } else {
    document.querySelector('#emptyPanier').classList.add('d-none');
-
    afficherTabPanier(tabObjetsLocalStorage);
-
-   window.onload = () => {
-      const lesBoutonsSup = document.querySelectorAll('.supprimerUneLigne');
-      for (const unBoutonSup of lesBoutonsSup) {
-         unBoutonSup.addEventListener('click', () => {
-         const index = unBoutonSup.querySelector('input').value;
-         supprimerLignePanier(index);
-         })
-      };
-   };
 };
 
 afficherCompteurPanier();

@@ -3,6 +3,7 @@ const idTeddy = document.location.hash.substring(1); //Récupération de l'id pr
 /**
  * Permet d'afficher un produit en fonction de l'id transmis par la page index.html.
  * @param {String} idTeddy id de l'article sélectionné.
+ * @returns {String} retourne du HTML.
  */
 const afficherUnTeddy = async (idTeddy) => {
    const data = await get(`http://localhost:3000/api/teddies/${idTeddy}`);
@@ -36,13 +37,12 @@ const afficherUnTeddy = async (idTeddy) => {
                      </li>
                   </ul>
                   <div class="card-footer text-center">
-                     <button id="ajoutPanier" type="button" class="btn btn-secondary" data-toggle="modal" data-target="#confirmationAjoutPanier" onclick="ajoutTeddyLocalStorage(idTeddy, document.querySelector('#quantite').value)">Ajouter au panier</button>
+                     <button id="ajoutPanier" type="button" class="btn btn-secondary" data-toggle="modal" data-target="#confirmationAjoutPanier">Ajouter au panier</button>
                   </div>
                </div>
             </div>`;
+   return article;
 };
-
-afficherUnTeddy(idTeddy);
 
 
 /**
@@ -65,4 +65,14 @@ const ajoutTeddyLocalStorage = async (idTeddy, quantite) => {
    }
 };
 
+afficherUnTeddy(idTeddy)
+   .then( article => {
+      article.querySelector('#ajoutPanier').addEventListener('click', () => {
+         const quantite = article.querySelector('#quantite').value;
+         ajoutTeddyLocalStorage(idTeddy, quantite);
+      })
+   });
+
 afficherCompteurPanier();
+
+document.querySelector('.close').addEventListener('click', () => document.location.reload());

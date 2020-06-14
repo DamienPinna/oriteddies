@@ -111,5 +111,6 @@ if (localStorage.getItem('produitsPanier') === null || localStorage.getItem('pro
 } else {
    document.querySelector('#emptyPanier').classList.add('d-none');
    afficherTabPanier(tabObjetsLocalStorage);
-   afficherCompteurPanier();
-}
+};
+
+afficherCompteurPanier();

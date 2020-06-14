@@ -1,4 +1,4 @@
-order = {
+let order = {
    contact: {
       firstName: String,
       lastName: String,
@@ -19,7 +19,10 @@ const creerLignePanier = (teddy, index) => {
  
    const thSupprimer = document.createElement('th');
    thSupprimer.setAttribute('scope', 'row');
-   thSupprimer.innerHTML= `<i onclick="supprimerLignePanier('${index}')" class="fas fa-times-circle"></i>`;
+   thSupprimer.innerHTML= `<div class="supprimerUneLigne">
+                              <i class="fas fa-times-circle"></i>
+                              <input type="hidden" value="${index}">
+                           </div>`;
    tr.appendChild(thSupprimer);
 
    const tdArticle = document.createElement('td');
@@ -110,7 +113,18 @@ if (localStorage.getItem('produitsPanier') === null || localStorage.getItem('pro
    document.querySelector('footer').classList.add('fixed-bottom');
 } else {
    document.querySelector('#emptyPanier').classList.add('d-none');
+
    afficherTabPanier(tabObjetsLocalStorage);
+
+   window.onload = () => {
+      const lesBoutonsSup = document.querySelectorAll('.supprimerUneLigne');
+      for (const unBoutonSup of lesBoutonsSup) {
+         unBoutonSup.addEventListener('click', () => {
+         const index = unBoutonSup.querySelector('input').value;
+         supprimerLignePanier(index);
+         })
+      };
+   };
 };
 
 afficherCompteurPanier();

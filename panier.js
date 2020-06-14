@@ -78,11 +78,10 @@ const supprimerLignePanier = index => {
 /**
  * Fonctionner permettant de supprimer l'item produitsPanier du localStorage et de raffraichir la page.
  */
-const deletePanier = () => {
+document.querySelector('#viderPanier').addEventListener('click', () => {
    localStorage.removeItem('produitsPanier');
    document.location.reload();
-};
-
+});
 
 /**
  * Permet au clique sur le bouton commander d'envoyer les informations de la commande au serveur et d'enregistrer le retour dans la sessionStorage.

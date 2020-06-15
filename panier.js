@@ -8,6 +8,7 @@ window.onload = () => {
    };
 };
 
+//Objet envoyé au serveur :
 let order = {
    contact: {
       firstName: String,
@@ -18,6 +19,22 @@ let order = {
       },
    products: [String]
 };
+
+//Les élements du formulaire :
+const form = document.querySelector('form');
+const inputFirstName = document.querySelector('#firstName');
+const missFirstName = document.querySelector('#missFirstName');
+const inputLastName = document.querySelector('#lastName');
+const missLastName = document.querySelector('#missLastName');
+const inputAddress = document.querySelector('#address')
+const missAddress = document.querySelector('#missAddress')
+const inputCity = document.querySelector('#city');
+const missCity = document.querySelector('#missCity');
+const inputEmail = document.querySelector('#email');
+const missEmail = document.querySelector('#missEmail');
+const allMiss = document.querySelector('form span');
+
+
 
 /**
  * Fonction qui permet de créer une ligne du panier en HTML.
@@ -95,27 +112,86 @@ document.querySelector('#viderPanier').addEventListener('click', () => {
 
 
 /**
+ * Fonction permettant de controler les entrées du formulaire.
+ */
+const checkForm = (firstName, lastName, address, email) => {
+   const nameOK = /^[a-zA-ZéèîïôÉÈÎÏÔ][a-zéèêàçîïô]+([-'\s][a-zA-ZéèîïÉÈÎÏÔ][a-zéèêàçîïô]+)?$/;
+   const emailOK = /^[a-zA-Z0-9._-]+@[a-z0-9._-]{2,}\.[a-z]{2,4}$/;
+   const addressOK = /[a-zéèàïî0-9]/i;
+   // const addressOK = /^[a-zéèàïî0-9]*+[-\s]?$/;
+   allMiss.textContent = "";
+   
+   //Test du prénom :
+   if (firstName === "") {
+      missFirstName.textContent = "Veuillez renseigner votre prénom.";
+   } else if (nameOK.test(firstName) == false) {
+      missFirstName.textContent = "Le prénom saisi n'est pas valide.";
+   } else {
+      order.contact.firstName = firstName;
+   };
+
+   //Test du nom :
+   if (lastName === "") {
+      missLastName.textContent = "Veuillez renseigner votre nom.";
+   } else if (nameOK.test(lastName) == false) {
+      missLastName.textContent = "Le nom saisi n'est pas valide.";
+   } else {
+      order.contact.lastName = lastName;
+   };
+
+    //Test de l'adresse :
+    if (address === "") {
+      missAddress.textContent = "Veuillez renseigner votre adresse.";
+   } else if (addressOK.test(address) == false) {
+      missAddress.textContent = "l'adresse saisie n'est pas valide.";
+   } else {
+      order.contact.address = address;
+   };
+
+   //Test de l'adresse mail :
+   if (email === "") {
+      missEmail.textContent = "Veuillez renseigner votre email.";
+   } else if (emailOK.test(email) == false) {
+      missEmail.textContent = "L'email saisi n'est pas valide.";
+   } else {
+      order.contact.email = email;
+   };
+};
+
+
+/**
  * Permet au clique sur le bouton "commander" d'envoyer les informations de la commande au serveur et d'enregistrer le retour dans la sessionStorage.
  */
-document.querySelector('form').addEventListener('submit', event => {
+form.addEventListener('submit', event => {
    event.preventDefault();
    
-   order.contact.firstName = document.querySelector('#firstName').value;
-   order.contact.lastName = document.querySelector('#lastName').value;
-   order.contact.address = document.querySelector('#address').value;
-   order.contact.city = document.querySelector('#city').value;
-   order.contact.email = document.querySelector('#email').value;
+   // order.contact.firstName = inputFirstName.value;
+   // order.contact.lastName = inputLastName.value;
+   // order.contact.address = inputAddress.value;
+   // order.contact.city = inputCity.value;
+   // order.contact.email = inputEmail.value;
 
-   const products = tabObjetsLocalStorage.map(e => e._id);
-   order.products = products;
+   const firstName = inputFirstName.value;
+   const lastName = inputLastName.value;
+   const address = inputAddress.value;
+   // order.contact.city = inputCity.value;
+   const email = inputEmail.value;
+
+   checkForm(firstName, lastName, address, email);
+
+   // const products = tabObjetsLocalStorage.map(e => e._id);
+   // order.products = products;
    
-   insertPost(order)
-   .then(responseData => ajouterCommandeDansSessionStorage(responseData))
-   .then( () => { 
-      localStorage.removeItem('produitsPanier'); 
-      window.location.href = 'confirm_order.html';
-   });
+   // insertPost(order)
+   // .then(responseData => ajouterCommandeDansSessionStorage(responseData))
+   // .then( () => { 
+   //    localStorage.removeItem('produitsPanier'); 
+   //    window.location.href = 'confirm_order.html';
+   // });
 });
+
+
+
 
 //Affichage :
 if (localStorage.getItem('produitsPanier') === null || localStorage.getItem('produitsPanier') === "[]") {

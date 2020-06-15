@@ -7,3 +7,7 @@ body {
    color: tomato;
    cursor: pointer;;
 }
+
+form span {
+   color: red;
+}

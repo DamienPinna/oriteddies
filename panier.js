@@ -32,8 +32,7 @@ const inputCity = document.querySelector('#city');
 const missCity = document.querySelector('#missCity');
 const inputEmail = document.querySelector('#email');
 const missEmail = document.querySelector('#missEmail');
-const allMiss = document.querySelector('form span');
-
+const allMiss = document.querySelectorAll('form span');
 
 
 /**
@@ -93,7 +92,7 @@ const afficherTabPanier = teddies => {
 
 /**
  * Fonction qui permet de supprimer un objet du tableau se trouvant dans le localStorage.
- * @param {*} index position du clique sur un bouton "supprimer".
+ * @param {Number} index position du clique sur un bouton "supprimer".
  */
 const supprimerLignePanier = index => {
    tabObjetsLocalStorage.splice(index, 1);
@@ -113,39 +112,62 @@ document.querySelector('#viderPanier').addEventListener('click', () => {
 
 /**
  * Fonction permettant de controler les entrées du formulaire.
+ * @param {String} firstName prénom saisi dans le formulaire.
+ * @param {String} lastName nom saisi dans le formulaire.
+ * @param {String} address adresse saisie dans le formulaire.
+ * @param {String} city ville saisie dans le formulaire.
+ * @param {String} email adresse mail saisie dans le formulaire.
+ * @returns {Boolean} retourn true si la contrôle du formulaire est OK.
  */
-const checkForm = (firstName, lastName, address, email) => {
-   const nameOK = /^[a-zA-ZéèîïôÉÈÎÏÔ][a-zéèêàçîïô]+([-'\s][a-zA-ZéèîïÉÈÎÏÔ][a-zéèêàçîïô]+)?$/;
+const checkForm = (firstName, lastName, address, city, email) => {
+   let compteurCheckForm = 0;
+
+   const firstNameOK = /^[A-ZÀ-Ý]{1}[a-zà-ý\s'-]+$/;
+   const lastNameOK = /^([A-ZÀ-Ý\s-]){2,}$/;
+   const addressOK = /^[a-zà-ý0-9-'\s]*$/i;
+   const cityOK = /^[a-zà-ý-'\s]*$/i;
    const emailOK = /^[a-zA-Z0-9._-]+@[a-z0-9._-]{2,}\.[a-z]{2,4}$/;
-   const addressOK = /[a-zéèàïî0-9]/i;
-   // const addressOK = /^[a-zéèàïî0-9]*+[-\s]?$/;
-   allMiss.textContent = "";
+   
+   allMiss.forEach(oneMiss => oneMiss.textContent = "");
    
    //Test du prénom :
    if (firstName === "") {
       missFirstName.textContent = "Veuillez renseigner votre prénom.";
-   } else if (nameOK.test(firstName) == false) {
+   } else if (firstNameOK.test(firstName) == false) {
       missFirstName.textContent = "Le prénom saisi n'est pas valide.";
    } else {
       order.contact.firstName = firstName;
+      compteurCheckForm++;
    };
 
    //Test du nom :
    if (lastName === "") {
       missLastName.textContent = "Veuillez renseigner votre nom.";
-   } else if (nameOK.test(lastName) == false) {
+   } else if (lastNameOK.test(lastName) == false) {
       missLastName.textContent = "Le nom saisi n'est pas valide.";
    } else {
       order.contact.lastName = lastName;
+      compteurCheckForm++;
    };
 
-    //Test de l'adresse :
-    if (address === "") {
+   //Test de l'adresse :
+   if (address === "") {
       missAddress.textContent = "Veuillez renseigner votre adresse.";
    } else if (addressOK.test(address) == false) {
       missAddress.textContent = "l'adresse saisie n'est pas valide.";
    } else {
       order.contact.address = address;
+      compteurCheckForm++;
+   };
+
+   //Test de la ville :
+   if (city === "") {
+      missCity.textContent = "Veuillez renseigner votre ville.";
+   } else if (cityOK.test(city) == false) {
+      missCity.textContent = "la ville saisie n'est pas valide.";
+   } else {
+      order.contact.city = city;
+      compteurCheckForm++;
    };
 
    //Test de l'adresse mail :
@@ -155,33 +177,42 @@ const checkForm = (firstName, lastName, address, email) => {
       missEmail.textContent = "L'email saisi n'est pas valide.";
    } else {
       order.contact.email = email;
+      compteurCheckForm++;
+   };
+   
+   if (compteurCheckForm === 5) {
+      return true;
+   } else {
+      return false;
    };
 };
 
 
 /**
- * Permet au clique sur le bouton "commander" d'envoyer les informations de la commande au serveur et d'enregistrer le retour dans la sessionStorage.
+ * Permet au clique sur le bouton "commander" d'envoyer les informations de la commande au serveur et d'enregistrer le retour dans la sessionStorage après contrôle des inputs.
  */
 form.addEventListener('submit', event => {
    event.preventDefault();
-   
-   // order.contact.firstName = inputFirstName.value;
-   // order.contact.lastName = inputLastName.value;
-   // order.contact.address = inputAddress.value;
-   // order.contact.city = inputCity.value;
-   // order.contact.email = inputEmail.value;
 
    const firstName = inputFirstName.value;
    const lastName = inputLastName.value;
    const address = inputAddress.value;
-   // order.contact.city = inputCity.value;
+   const city = inputCity.value;
    const email = inputEmail.value;
 
-   checkForm(firstName, lastName, address, email);
+   const resulatcheckForm = checkForm(firstName, lastName, address, city, email);
 
-   // const products = tabObjetsLocalStorage.map(e => e._id);
-   // order.products = products;
+   const products = tabObjetsLocalStorage.map(e => e._id);
+   order.products = products;
    
+   console.log(resulatcheckForm);
+
+   // if (checkForm == true) {
+   //    console.log('controle OK');
+   // } else {
+   //    console.log('controle KO');
+   // }
+
    // insertPost(order)
    // .then(responseData => ajouterCommandeDansSessionStorage(responseData))
    // .then( () => { 
@@ -189,8 +220,6 @@ form.addEventListener('submit', event => {
    //    window.location.href = 'confirm_order.html';
    // });
 });
-
-
 
 
 //Affichage :

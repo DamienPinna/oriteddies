@@ -23,7 +23,6 @@ const getTabSessionStorage = () => {
 /**
  * Fonction qui permet d'effectuer des requêtes GET à la base de données.
  * @param {String} url
- * @returns {Promise}
  */
 const get = async (url) => {
    try {

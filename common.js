@@ -9,10 +9,10 @@ const ajouterProduitDansLocalStorage = tabProduitsPanier => {
 
 
 /**
- * 
+ * Fonction qui permet d'ajouter dans le localStorage la commande.
  * @param {String} responseData réponse du serveur au format JSON de l'objet contact, un tableau des produits commandés et l'id de la commande.
  */
-const ajouterCommandeDansSessionStorage = responseData => { sessionStorage.setItem('order', responseData) };
+const ajouterCommandeDansSessionStorage = responseData => sessionStorage.setItem('order', responseData);
 
 
 /**

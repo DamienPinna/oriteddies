@@ -38,7 +38,7 @@ const allMiss = document.querySelectorAll('form span');
 /**
  * Fonction qui permet de créer une ligne du panier en HTML.
  * @param {Object} teddy correspond à un élement du tableau de produit(s).
- * @returns {String}
+ * @returns {String} HTML
  */
 const creerLignePanier = (teddy, index) => {
    const tr = document.createElement('tr');
@@ -74,7 +74,7 @@ const creerLignePanier = (teddy, index) => {
 
 /**
  * Fonction qui permet d'afficher sur le navigateur la liste des produits du panier.
- * @param {Array} teddies 
+ * @param {Array} teddies les produits sélectionnés par l'utilisateur.
  */
 const afficherTabPanier = teddies => {
    const tbody = document.querySelector('tbody');
@@ -117,7 +117,7 @@ document.querySelector('#viderPanier').addEventListener('click', () => {
  * @param {String} address adresse saisie dans le formulaire.
  * @param {String} city ville saisie dans le formulaire.
  * @param {String} email adresse mail saisie dans le formulaire.
- * @returns {Boolean} retourn true si la contrôle du formulaire est OK.
+ * @returns {Boolean} retourne true si le contrôle du formulaire est OK.
  */
 const checkForm = (firstName, lastName, address, city, email) => {
    let compteurCheckForm = 0;
@@ -179,12 +179,8 @@ const checkForm = (firstName, lastName, address, city, email) => {
       order.contact.email = email;
       compteurCheckForm++;
    };
-   
-   if (compteurCheckForm === 5) {
-      return true;
-   } else {
-      return false;
-   };
+
+   return (compteurCheckForm == 5) ? true : false;
 };
 
 
@@ -207,18 +203,14 @@ form.addEventListener('submit', event => {
    
    console.log(resulatcheckForm);
 
-   // if (checkForm == true) {
-   //    console.log('controle OK');
-   // } else {
-   //    console.log('controle KO');
-   // }
-
-   // insertPost(order)
-   // .then(responseData => ajouterCommandeDansSessionStorage(responseData))
-   // .then( () => { 
-   //    localStorage.removeItem('produitsPanier'); 
-   //    window.location.href = 'confirm_order.html';
-   // });
+   if (resulatcheckForm) {
+      insertPost(order)
+      .then(responseData => ajouterCommandeDansSessionStorage(responseData))
+      .then( () => { 
+         localStorage.removeItem('produitsPanier'); 
+         window.location.href = 'confirm_order.html';
+      });
+   };
 });
 
 

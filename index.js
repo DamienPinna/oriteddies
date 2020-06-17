@@ -1,6 +1,5 @@
 /**
  * Permet d'afficher tous les articles dans le navigateur.
- * @returns {Promise}
  */
 const afficherTeddies = async () => {
    const data = await get('http://localhost:3000/api/teddies');

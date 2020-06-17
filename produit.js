@@ -5,11 +5,11 @@ const idTeddy = document.location.hash.substring(1); //Récupération de l'id pr
  * @param {String} idTeddy id de l'article sélectionné.
  * @returns {String} retourne du HTML.
  */
-const afficherUnTeddy = async (idTeddy) => {
+const afficherUnTeddy = async idTeddy => {
    const data = await get(`http://localhost:3000/api/teddies/${idTeddy}`);
    const article = document.querySelector('#article');
 
-   //Je créé dynamiquement la liste de couleurs.
+   //Création dynamiquement de la liste de couleurs.
    let listeDesCouleurs = "";
    for (let couleur of data.colors) {
       listeDesCouleurs += `<option value="${couleur}">${couleur}</option>`;
@@ -48,7 +48,7 @@ const afficherUnTeddy = async (idTeddy) => {
 /**
  * Fonction qui permet d'ajouter le produit dans le localStorage.
  * @param {String} idTeddy id de l'article sélectionné.
- * @param {Number} quantite quantité d'articles sélectionné par l'utilisateur.
+ * @param {Number} quantite quantité d'articles sélectionnée par l'utilisateur.
  */
 const ajoutTeddyLocalStorage = async (idTeddy, quantite) => {
    let data = await get(`http://localhost:3000/api/teddies/${idTeddy}`);
@@ -62,7 +62,7 @@ const ajoutTeddyLocalStorage = async (idTeddy, quantite) => {
       tabProduitsPanier = JSON.parse(tabProduitsPanier);
       tabProduitsPanier.push(data);
       ajouterProduitDansLocalStorage(tabProduitsPanier);
-   }
+   };
 };
 
 afficherUnTeddy(idTeddy)

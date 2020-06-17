@@ -48,7 +48,7 @@ const afficherUnTeddy = async idTeddy => {
 /**
  * Fonction qui permet d'ajouter le produit dans le localStorage.
  * @param {String} idTeddy id de l'article sélectionné.
- * @param {Number} quantite quantité d'articles sélectionnée par l'utilisateur.
+ * @param {String} quantite quantité d'articles sélectionnée par l'utilisateur.
  */
 const ajoutTeddyLocalStorage = async (idTeddy, quantite) => {
    let data = await get(`http://localhost:3000/api/teddies/${idTeddy}`);
@@ -67,9 +67,19 @@ const ajoutTeddyLocalStorage = async (idTeddy, quantite) => {
 
 afficherUnTeddy(idTeddy)
    .then( article => {
-      article.querySelector('#ajoutPanier').addEventListener('click', () => {
+      const btnAjoutPanier = article.querySelector('#ajoutPanier');
+      btnAjoutPanier.addEventListener('click', () => {
          const quantite = article.querySelector('#quantite').value;
-         ajoutTeddyLocalStorage(idTeddy, quantite);
+         
+         if (parseInt(quantite) > 0 && Number.isInteger(parseFloat(quantite))) {
+            ajoutTeddyLocalStorage(idTeddy, quantite);
+         } else {
+            btnAjoutPanier.removeAttribute('data-toggle');
+            btnAjoutPanier.removeAttribute('data-target');
+            alert("Il faut saisir un entier supérieur à 0");
+            location.reload();
+         }
+
       })
    });
 

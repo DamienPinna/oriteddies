@@ -200,8 +200,6 @@ form.addEventListener('submit', event => {
 
    const products = tabObjetsLocalStorage.map(e => e._id);
    order.products = products;
-   
-   console.log(resulatcheckForm);
 
    if (resulatcheckForm) {
       insertPost(order)

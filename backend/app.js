@@ -3,9 +3,9 @@ const bodyParser = require('body-parser'); // Middleware chargé de récupérer 
 const mongoose = require('mongoose'); //Permet d'utiliser MongoDB avec Node.JS
 const path = require('path'); //Permet d'utiliser un ensemble de fonctions et de propriétés pour manipuler et construire des chemins vesr des fichiers et répertoires
 
-const cameraRoutes = require('./routes/camera');
-const teddyRoutes = require('./routes/teddy');
-const furnitureRoutes = require('./routes/furniture');
+const cameraRoutes = require('../routes/camera');
+const teddyRoutes = require('../routes/teddy');
+const furnitureRoutes = require('../routes/furniture');
 
 const app = express();
 

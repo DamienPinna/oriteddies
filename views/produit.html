@@ -8,11 +8,11 @@
       <!-- Bootstrap CSS -->
       <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
 
-      <link rel="stylesheet" href="./css/style.css">
+      <link rel="stylesheet" href="../css/style.css">
       <script src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"></script>
-      <script src="./javascript/common.js"></script>
-      <script src="./javascript/queries.js"></script>
-      <script defer src="./javascript/index.js"></script>
+      <script src="../javascript/common.js"></script>
+      <script src="../javascript/queries.js"></script>
+      <script defer src="../javascript/produit.js"></script>
       
    </head>
    <body>
@@ -22,20 +22,20 @@
          <nav class="navbar navbar-expand-sm navbar-dark bg-dark fixed-top">
            <div class="container">
    
-             <a class="navbar-brand" href="index.html">ORITEDDIES</a>
+             <a class="navbar-brand" href="../index.html">ORITEDDIES</a>
              <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
                <span class="navbar-toggler-icon"></span>
              </button>
    
              <div class="collapse navbar-collapse" id="navbarResponsive">
                <ul class="navbar-nav ml-auto">
-                 <li class="nav-item active">
-                   <a class="nav-link" href="index.html">Accueil
+                 <li class="nav-item">
+                   <a class="nav-link" href="../index.html">Accueil
                      <span class="sr-only">(current)</span>
                    </a>
                  </li>
                  <li class="nav-item">
-                   <a class="nav-link" href="./views/panier.html">Panier<i class="fas fa-shopping-cart ml-1"></i><span class="badge badge-light ml-2"></span></a>
+                   <a class="nav-link" href="./panier.html">Panier<i class="fas fa-shopping-cart ml-1"></i><span class="badge badge-light ml-2"></span></a>
                  </li>
                </ul>
              </div>
@@ -45,22 +45,20 @@
       </header>
       <!-- /Navigation -->
 
-
       <!-- Page Content -->
       <div class="container-lg pt-3 pb-5">
          <div class="border border-dark bg-secondary rounded text-center text-white py-2">
             <h1>Oriteddies</h1>
-            <h2 class="h4">La boutique des oursons trop mignons</h2>
+            <h2 class="h4">Ma sélection</h2>
          </div>
       </div>
-
-      <div class="container">
-         <div class="row" id="articles">
+      
+      <div class="container mb-5">
+         <div class="row" id="article">
             <!-- Contenu généré via JS -->
          </div>
       </div>
       <!-- /Page Content -->
-
 
       <!-- Alerte en cas de problème avec le serveur -->
       <div class="container-lg d-none">
@@ -70,7 +68,6 @@
       </div>
       <!-- /Alerte en cas de problème avec le serveur -->
 
-
       <!-- Footer -->
       <footer class="py-3 bg-dark">
         <div class="container">
@@ -78,6 +75,28 @@
         </div>
       </footer>
       <!-- /Footer -->
+
+      <!-- Modal -->
+      <div class="modal fade" id="confirmationAjoutPanier" data-backdrop="static" data-keyboard="false" tabindex="-1" role="dialog" aria-labelledby="confirmationAjoutPanier" aria-hidden="true">
+         <div class="modal-dialog">
+            <div class="modal-content">
+               <div class="modal-header">
+                  <h5 class="modal-title" id="exampleModalLabel">Confirmation ajout panier</h5>
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                  </button>
+               </div>
+               <div class="modal-body">
+                  Ce produit a bien été ajouté au panier.
+               </div>
+               <div class="modal-footer">
+                  <a href="../index.html" class="btn btn-success">Continuer mes achats</a>
+                  <a href="./panier.html" class="btn btn-primary">Aller au panier</a>
+               </div>
+            </div>
+         </div>
+      </div>
+      <!-- /Modal -->
     
       <!-- Bootstrap core JavaScript -->
       <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
